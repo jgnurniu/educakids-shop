@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Checkout — EducaKids Shop. Revisá tu carrito y finaliza tu compra de materiales educativos PDF." />
+  <title>Checkout — EducaKids Shop</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #6C63FF; --primary-dark: #574fd6;
+      --secondary: #FF6584; --accent: #43D19E;
+      --bg: #F7F8FC; --white: #ffffff;
+      --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-400: #9ca3af; --gray-600: #4b5563; --gray-800: #1f2937;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.12);
+      --radius: 16px; --transition: .2s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--gray-800); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; border: none; outline: none; }
+    main { flex: 1; }
+
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 100; background: var(--white); box-shadow: var(--shadow-sm); padding: 0 24px; }
+    .header-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; gap: 16px; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+
+    /* CHECKOUT STEPS */
+    .steps { background: var(--white); border-bottom: 1px solid var(--gray-200); }
+    .steps-inner { max-width: 800px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 24px; }
+    .step { display: flex; align-items: center; gap: 8px; font-size: .85rem; font-weight: 600; color: var(--gray-400); }
+    .step.active { color: var(--primary); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--gray-200); display: flex; align-items: center; justify-content: center; font-size: .8rem; font-weight: 700; }
+    .step.active .step-num { background: var(--primary); color: white; }
+    .step.done .step-num { background: var(--accent); color: white; }
+    .step-sep { flex: 1; height: 2px; background: var(--gray-200); max-width: 60px; }
+
+    /* MAIN LAYOUT */
+    .checkout-wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; display: grid; grid-template-columns: 1fr 360px; gap: 32px; align-items: start; }
+    @media (max-width: 768px) { .checkout-wrap { grid-template-columns: 1fr; gap: 24px; } }
+
+    .panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--gray-200); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .panel-head { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; justify-content: space-between; }
+    .panel-head h2 { font-size: 1.1rem; font-weight: 800; }
+    .panel-head a { font-size: .85rem; color: var(--primary); font-weight: 600; }
+    .panel-head a:hover { text-decoration: underline; }
+    .panel-body { padding: 16px 24px; }
+
+    /* CART ITEMS */
+    .checkout-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+    .checkout-item:last-child { border-bottom: none; }
+    .item-img { width: 80px; height: 80px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: var(--gray-100); }
+    .item-info { flex: 1; }
+    .item-name { font-weight: 700; margin-bottom: 4px; }
+    .item-meta { font-size: .82rem; color: var(--gray-600); margin-bottom: 8px; }
+    .item-qty-row { display: flex; align-items: center; gap: 8px; }
+    .qty-btn { background: var(--gray-100); border-radius: 6px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; transition: var(--transition); }
+    .qty-btn:hover { background: var(--primary); color: white; }
+    .qty-val { font-weight: 700; font-size: .9rem; min-width: 20px; text-align: center; }
+    .item-price-col { text-align: right; }
+    .item-price { font-size: 1.1rem; font-weight: 900; color: var(--primary); }
+    .item-price.free { color: var(--accent); }
+    .item-unit-price { font-size: .75rem; color: var(--gray-400); margin-top: 2px; }
+    .remove-btn { background: none; color: var(--gray-400); font-size: .85rem; margin-top: 8px; transition: color var(--transition); display: block; }
+    .remove-btn:hover { color: var(--secondary); }
+
+    /* SUMMARY */
+    .summary-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: .9rem; color: var(--gray-600); border-bottom: 1px solid var(--gray-100); }
+    .summary-row:last-of-type { border-bottom: none; }
+    .summary-total { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 8px; border-top: 2px solid var(--gray-200); margin-top: 8px; }
+    .summary-total-label { font-size: 1rem; font-weight: 800; }
+    .summary-total-val { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+    .summary-total-val.free { color: var(--accent); }
+
+    /* PAY BUTTONS */
+    .pay-section { display: flex; flex-direction: column; gap: 12px; padding-top: 8px; }
+    .btn-pay {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      border-radius: 12px; padding: 16px 24px; font-size: 1rem; font-weight: 800;
+      transition: var(--transition); width: 100%; text-decoration: none;
+    }
+    .btn-pay-primary { background: #009ee3; color: white; }
+    .btn-pay-primary:hover { background: #0081be; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,158,227,.35); }
+    .btn-pay-free { background: var(--accent); color: white; }
+    .btn-pay-free:hover { background: #35b986; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; border: 2px solid var(--gray-200); color: var(--gray-600); border-radius: 12px; padding: 12px 24px; font-size: .9rem; font-weight: 600; transition: var(--transition); width: 100%; }
+    .btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+    .mp-note { font-size: .78rem; color: var(--gray-400); text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .security-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 4px; }
+    .sec-badge { background: var(--gray-100); border-radius: 8px; padding: 10px 12px; font-size: .78rem; color: var(--gray-600); display: flex; align-items: center; gap: 6px; }
+
+    /* EMPTY CART */
+    .empty-cart { text-align: center; padding: 64px 24px; }
+    .empty-icon { font-size: 4rem; margin-bottom: 16px; }
+    .empty-cart h3 { font-size: 1.2rem; color: var(--gray-600); margin-bottom: 8px; }
+    .empty-cart p { color: var(--gray-400); margin-bottom: 24px; }
+    .btn-back { display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: white; border-radius: 10px; padding: 12px 24px; font-weight: 600; }
+    .btn-back:hover { background: var(--primary-dark); }
+
+    /* MULTI-PRODUCT PAY */
+    .multi-pay { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--gray-200); }
+    .multi-pay-label { font-size: .82rem; color: var(--gray-600); font-weight: 600; margin-bottom: 10px; }
+    .multi-pay-list { display: flex; flex-direction: column; gap: 8px; }
+    .mp-item-btn { display: flex; align-items: center; gap: 10px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: 10px; padding: 10px 14px; font-size: .85rem; font-weight: 600; transition: var(--transition); color: var(--gray-800); text-decoration: none; }
+    .mp-item-btn:hover { border-color: #009ee3; color: #009ee3; background: #f0faff; }
+    .mp-item-btn img { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
+
+    footer { background: var(--gray-800); color: var(--gray-400); text-align: center; padding: 32px 24px; font-size: .85rem; }
+    footer strong { color: white; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><span>📚</span> EducaKids Shop</a>
+  </div>
+</header>
+
+<!-- STEPS -->
+<div class="steps">
+  <div class="steps-inner">
+    <div class="step active"><span class="step-num">1</span> Carrito</div>
+    <div class="step-sep"></div>
+    <div class="step"><span class="step-num">2</span> Pago</div>
+    <div class="step-sep"></div>
+    <div class="step"><span class="step-num">3</span> Confirmación</div>
+  </div>
+</div>
+
+<main>
+  <div class="checkout-wrap" id="checkoutWrap">
+    <div style="text-align:center;padding:80px;color:#9ca3af">Cargando carrito…</div>
+  </div>
+</main>
+
+<footer><p><strong>EducaKids Shop</strong> · Materiales educativos PDF · © 2025</p></footer>
+
+<script>
+  const productos = [
+    { id:1, nombre:"Cuadernillo Matemática 1°", materia:"Matemática", grado:"1° grado", paginas:48, precio:1200, imagen:"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&h=150&fit=crop", pdf:"assets/pdf/matematica-1ro.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-mat-1" },
+    { id:2, nombre:"Lectura y Escritura 2°", materia:"Lengua", grado:"2° grado", paginas:60, precio:1500, imagen:"https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=200&h=150&fit=crop", pdf:"assets/pdf/lengua-2do.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-len-2" },
+    { id:3, nombre:"Ciencias Naturales 3°", materia:"Ciencias", grado:"3° grado", paginas:52, precio:1350, imagen:"https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=200&h=150&fit=crop", pdf:"assets/pdf/ciencias-3ro.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-cien-3" },
+    { id:4, nombre:"Historia Argentina 4°", materia:"Sociales", grado:"4° grado", paginas:64, precio:1600, imagen:"https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=200&h=150&fit=crop", pdf:"assets/pdf/historia-4to.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-hist-4" },
+    { id:5, nombre:"Inglés Básico 5°", materia:"Lengua", grado:"5° grado", paginas:56, precio:1700, imagen:"https://images.unsplash.com/photo-1543269865-cbf427effbad?w=200&h=150&fit=crop", pdf:"assets/pdf/ingles-5to.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-eng-5" },
+    { id:6, nombre:"Geometría 6°", materia:"Matemática", grado:"6° grado", paginas:72, precio:1900, imagen:"https://images.unsplash.com/photo-1509228468518-180dd4864904?w=200&h=150&fit=crop", pdf:"assets/pdf/geometria-6to.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-geo-6" },
+    { id:7, nombre:"Coloreo y Aprendo — Inicial", materia:"Arte", grado:"Inicial", paginas:30, precio:0, imagen:"https://images.unsplash.com/photo-1572375992501-4b0892d50c69?w=200&h=150&fit=crop", pdf:"assets/pdf/coloreo-inicial.pdf", mercadopago:"" },
+    { id:8, nombre:"Abecedario Divertido — Inicial", materia:"Lengua", grado:"Inicial", paginas:26, precio:0, imagen:"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=200&h=150&fit=crop", pdf:"assets/pdf/abecedario-inicial.pdf", mercadopago:"" },
+    { id:9, nombre:"Álgebra Introductoria 1° Sec.", materia:"Matemática", grado:"1° secundaria", paginas:88, precio:2400, imagen:"https://images.unsplash.com/photo-1635372722656-389f87a941b7?w=200&h=150&fit=crop", pdf:"assets/pdf/algebra-1sec.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-alg-sec1" },
+    { id:10, nombre:"Física y Química 2° Sec.", materia:"Ciencias", grado:"2° secundaria", paginas:96, precio:2700, imagen:"https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=200&h=150&fit=crop", pdf:"assets/pdf/fisicaquimica-2sec.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-fq-sec2" },
+    { id:11, nombre:"Geografía Mundial 3° Sec.", materia:"Sociales", grado:"3° secundaria", paginas:76, precio:2200, imagen:"https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=200&h=150&fit=crop", pdf:"assets/pdf/geografia-3sec.pdf", mercadopago:"https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=demo-geo-sec3" },
+    { id:12, nombre:"Arte y Expresión — Taller", materia:"Arte", grado:"Todos los grados", paginas:40, precio:0, imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=200&h=150&fit=crop", pdf:"assets/pdf/arte-taller.pdf", mercadopago:"" }
+  ];
+
+  const CART_KEY = 'educakids_cart';
+  function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY)||'[]'); } catch(e){ return []; } }
+  function saveCart(c) { localStorage.setItem(CART_KEY, JSON.stringify(c)); renderCheckout(); }
+  function removeItem(id) { saveCart(getCart().filter(i=>i.id!==id)); }
+  function changeQty(id,delta) { const c=getCart(); const idx=c.findIndex(i=>i.id===id); if(idx>-1){c[idx].qty=Math.max(1,(c[idx].qty||1)+delta);saveCart(c);} }
+
+  function getTotal(cart) {
+    return cart.reduce((s,i)=>{const p=productos.find(x=>x.id===i.id);return s+(p?p.precio*(i.qty||1):0);},0);
+  }
+
+  function payNow(id) {
+    const p = productos.find(x=>x.id===id);
+    if (!p) return;
+    if (p.precio===0) { alert('Este recurso es gratuito. Puedes descargarlo directamente desde la página del producto.'); return; }
+    // Save purchased IDs to sessionStorage so gracias.html can read them
+    const cart = getCart();
+    sessionStorage.setItem('educakids_paid', JSON.stringify([id]));
+    window.location.href = p.mercadopago;
+  }
+
+  function payAll() {
+    const cart = getCart();
+    const paidIds = cart.map(i=>i.id);
+    sessionStorage.setItem('educakids_paid', JSON.stringify(paidIds));
+    // Redirect to first paid product's MP link (common strategy)
+    const firstPaid = cart.find(i=>{const p=productos.find(x=>x.id===i.id);return p&&p.precio>0&&p.mercadopago;});
+    if (firstPaid) {
+      const p = productos.find(x=>x.id===firstPaid.id);
+      window.location.href = p.mercadopago;
+    } else {
+      // All free — go to gracias
+      window.location.href = 'gracias.html?free=1&ids=' + paidIds.join(',');
+    }
+  }
+
+  function renderCheckout() {
+    const cart = getCart();
+    const wrap = document.getElementById('checkoutWrap');
+
+    if (cart.length === 0) {
+      wrap.innerHTML = `
+        <div class="empty-cart" style="grid-column:1/-1">
+          <div class="empty-icon">🛒</div>
+          <h3>Tu carrito está vacío</h3>
+          <p>Todavía no agregaste ningún material.</p>
+          <a href="index.html" class="btn-back">← Ver catálogo</a>
+        </div>`;
+      return;
+    }
+
+    const cartItems = cart.map(item => {
+      const p = productos.find(x=>x.id===item.id);
+      if(!p) return '';
+      const isFree = p.precio === 0;
+      const subtotal = p.precio * (item.qty||1);
+      return `
+        <div class="checkout-item">
+          <img class="item-img" src="${p.imagen}" alt="${p.nombre}" loading="lazy">
+          <div class="item-info">
+            <div class="item-name">${p.nombre}</div>
+            <div class="item-meta">${p.materia} · ${p.grado} · ${p.paginas} págs.</div>
+            <div class="item-qty-row">
+              <button class="qty-btn" onclick="changeQty(${p.id},-1)">−</button>
+              <span class="qty-val">${item.qty||1}</span>
+              <button class="qty-btn" onclick="changeQty(${p.id},1)">+</button>
+              <button class="remove-btn" onclick="removeItem(${p.id})">✕ Eliminar</button>
+            </div>
+          </div>
+          <div class="item-price-col">
+            <div class="item-price ${isFree?'free':''}">${isFree?'GRATIS':'$'+subtotal.toLocaleString('es-AR')}</div>
+            ${!isFree&&item.qty>1?`<div class="item-unit-price">$${p.precio.toLocaleString('es-AR')} c/u</div>`:''}
+          </div>
+        </div>`;
+    }).join('');
+
+    const total = getTotal(cart);
+    const allFree = total === 0;
+
+    // Summary rows
+    const summaryRows = cart.map(item => {
+      const p = productos.find(x=>x.id===item.id);
+      if(!p) return '';
+      const sub = p.precio*(item.qty||1);
+      return `<div class="summary-row"><span>${p.nombre} ×${item.qty||1}</span><span>${p.precio===0?'GRATIS':'$'+sub.toLocaleString('es-AR')}</span></div>`;
+    }).join('');
+
+    // Multi-product individual pay buttons (for paid items)
+    const paidItems = cart.filter(i=>{ const p=productos.find(x=>x.id===i.id); return p&&p.precio>0&&p.mercadopago; });
+    const multiPayHtml = paidItems.length > 1 ? `
+      <div class="multi-pay">
+        <div class="multi-pay-label">💡 También podés pagar por producto individual:</div>
+        <div class="multi-pay-list">
+          ${paidItems.map(i=>{const p=productos.find(x=>x.id===i.id);return`<a href="${p.mercadopago}" onclick="sessionStorage.setItem('educakids_paid',JSON.stringify([${p.id}]))" class="mp-item-btn"><img src="${p.imagen}" alt="${p.nombre}">${p.nombre} — $${p.precio.toLocaleString('es-AR')}</a>`;}).join('')}
+        </div>
+      </div>` : '';
+
+    const payBtnHtml = allFree
+      ? `<a href="gracias.html?free=1&ids=${cart.map(i=>i.id).join(',')}" class="btn-pay btn-pay-free">📥 Descargar todos gratis</a>`
+      : `<button class="btn-pay btn-pay-primary" onclick="payAll()">
+           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+           Pagar con Mercado Pago
+         </button>`;
+
+    wrap.innerHTML = `
+      <div>
+        <div class="panel">
+          <div class="panel-head">
+            <h2>🛒 Productos (${cart.reduce((s,i)=>s+(i.qty||1),0)})</h2>
+            <a href="index.html">← Seguir comprando</a>
+          </div>
+          <div class="panel-body">${cartItems}</div>
+        </div>
+      </div>
+      <div>
+        <div class="panel">
+          <div class="panel-head"><h2>📋 Resumen del pedido</h2></div>
+          <div class="panel-body">
+            ${summaryRows}
+            <div class="summary-total">
+              <span class="summary-total-label">Total</span>
+              <span class="summary-total-val ${allFree?'free':''}">${allFree?'GRATIS':'$'+total.toLocaleString('es-AR')}</span>
+            </div>
+            <div class="pay-section">
+              ${payBtnHtml}
+              <a href="index.html" class="btn-secondary" style="text-align:center">← Seguir comprando</a>
+              ${!allFree?`<p class="mp-note">🔒 Pago 100% seguro con Mercado Pago</p>`:''}
+            </div>
+            <div class="security-badges">
+              <div class="sec-badge">🔒 SSL seguro</div>
+              <div class="sec-badge">📄 PDF inmediato</div>
+              <div class="sec-badge">🏦 Mercado Pago</div>
+              <div class="sec-badge">💳 Cuotas sin interés</div>
+            </div>
+            ${multiPayHtml}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCheckout);
+</script>
+</body>
+</html>
