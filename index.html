@@ -217,20 +217,28 @@
     .cat-bar-inner {
       max-width: 1400px; margin: 0 auto;
       display: flex; align-items: center;
-      padding: 0 24px; overflow-x: auto; gap: 0;
+      padding: 8px 24px; overflow-x: auto; gap: 6px;
     }
     .cat-bar-inner::-webkit-scrollbar { height: 0; }
     .cat-tab {
       display: flex; align-items: center; gap: 6px;
       padding: 12px 16px; font-size: .84rem; font-weight: 600;
-      color: var(--neutral-500); white-space: nowrap;
-      border-bottom: 2px solid transparent;
+      color: var(--neutral-600); white-space: nowrap;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--neutral-200);
+      background: white;
       font-family: var(--font-ui);
-      transition: color var(--transition-fast), border-color var(--transition-fast);
-      cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
+      transition: all var(--transition-fast);
+      cursor: pointer;
     }
-    .cat-tab:hover { color: var(--brand-600); }
-    .cat-tab.active { color: var(--brand-600); border-bottom-color: var(--brand-600); font-weight: 700; }
+    .cat-tab:hover { border-color: var(--brand-400); color: var(--brand-600); background: var(--brand-50); }
+    .cat-tab.active {
+      background: linear-gradient(135deg, var(--brand-600), var(--purple-500));
+      color: white; border-color: transparent;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(79,70,229,.3);
+    }
+    .cat-tab.active .cat-dot { background: rgba(255,255,255,.6) !important; }
     .cat-dot {
       width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
     }
