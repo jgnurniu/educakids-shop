@@ -678,163 +678,179 @@
 
 <script>
   /* ---- DATA ---- */
-  const productos = [
-    { id:1, nombre:"Cuadernillo de Actividades", descripcion:"Más de 500 actividades para aprender jugando. Material educativo diseñado para estimular la creatividad, el aprendizaje y la motricidad en niños pequeños desde casa.", materia:"Varios", grado:"3° grado", paginas:106, precio:2990, rating:4.8, reviews:124, badges:["hot"], imagen:"https://github.com/jgnurniu/EducaKids-Shop/blob/main/1.jpeg?raw=true", preview:["https://github.com/jgnurniu/EducaKids-Shop/blob/main/1.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/5.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/6.jpeg?raw=true"], mercadopago:"https://mpago.la/1PuAWBD" },
-    { id:2, nombre:"Cuadernillo de Tecnologia 5°", descripcion:"Fichas de trabajo para comprensión lectora y escritura en segundo grado. Textos cortos, preguntas de comprensión y ejercicios de caligrafía.", materia:"Tecnologia", grado:"5° grado", paginas:41, precio:2990, rating:4.9, reviews:218, badges:[""], imagen:"", preview:["https://github.com/jgnurniu/EducaKids-Shop/blob/main/7.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/10.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/9.jpeg?raw=true"], mercadopago:"https://mpago.li/2zMJM4h" },
-    { id:3, nombre:"Cuadernillo para Trabajar la Dislexia", descripcion:"Material diseñado específicamente para niños con dislexia. Actividades progresivas que facilitan la lectura, mejoran la concentración y fortalecen la confianza.", materia:"Dislexia", grado:"3° grado", paginas:26, precio:2990, rating:4.7, reviews:89, badges:["nuevo"], imagen:"https://github.com/jgnurniu/EducaKids-Shop/blob/main/13.jpeg?raw=true", preview:["https://github.com/jgnurniu/EducaKids-Shop/blob/main/12.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/15.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/14.jpeg?raw=true"], mercadopago:"https://mpago.li/2Q2aYt6" },
-    { id:4, nombre:"IA para Docentes Tu Guía Definitiva",   descripcion:"Domina la IA para ahorrar tiempo, personalizar el aprendizaje y transformar tus clases.",materia:"IA", grado:"Profesores", paginas:7, precio:0, rating:4.6, reviews:0, badges:["gratis"], imagen:"https://github.com/jgnurniu/EducaKids-Shop/blob/main/18.jpeg?raw=true", preview:["https://github.com/jgnurniu/EducaKids-Shop/blob/main/18.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/16.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/17.jpeg?raw=true"],  mercadopago:"https://jgnurniu.github.io/EducaKids/ia.html" },
-    { id: 5,  nombre: "Cuadernillo de Actividades Preescolar", descripcion: "Material de trabajo Grafomotricidad, con ejercicios de coordinación fina, para que la mano se suelte y tu hijo aprenda a dominar el lapiz antes de entrar de lleno a la alfabetización.",  materia: "Grafomotricidad",  grado: "Padres",  paginas: 108, precio: 2990,  rating: 4.2,  reviews: 140,  badges: ["nuevo"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/WhatsApp%20Image%202026-03-27%20at%2016.04.02.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo2.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo3.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo6.jpeg?raw=true"],  mercadopago: "https://mpago.li/17C4ZKZ"},
-    { id:6,  nombre:"Cuadernillo de Grafomotricidad",   descripcion:"Material de trabajo Grafomotricidad con +18 Actividades para niños de 3 años para adelante.", materia:"Grafomotricidad", grado:"Padres", paginas:21, precio:2990, rating:4.9, reviews:95,  badges:["hot"],       imagen:"https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo5.jpeg?raw=true" , preview:["https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo8.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo10.jpeg?raw=true","https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo9.jpeg?raw=true"],  mercadopago:"https://mpago.li/1YZXc44" },
-    { id:7, nombre:"",   descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-    { id:8, nombre:"",   descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-    { id:9, nombre:"",   descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-    { id:10, nombre:"",  descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-    { id:11, nombre:"",  descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-    { id:12, nombre:"",  descripcion:"", materia:"", grado:"", paginas:0, precio:0, rating:0, reviews:0, badges:[""], imagen:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&h=600&fit=crop", preview:["","",""],  mercadopago:"" },
-  ];
+const productos = [
+  { id: 1, nombre: "Cuadernillo de Actividades", descripcion: "Más de 500 actividades para aprender jugando. Material educativo diseñado para estimular la creatividad, el aprendizaje y la motricidad en niños pequeños desde casa.", materia: "Varios", grado: "3° grado", paginas: 106, precio: 2990, rating: 4.8, reviews: 124, badges: ["hot"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/1.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/1.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/5.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/6.jpeg?raw=true"], mercadopago: "https://mpago.la/1PuAWBD" },
+  { id: 2, nombre: "Cuadernillo de Tecnologia 5°", descripcion: "Fichas de trabajo para comprensión lectora y escritura en segundo grado. Textos cortos, preguntas de comprensión y ejercicios de caligrafía.", materia: "Tecnologia", grado: "5° grado", paginas: 41, precio: 2990, rating: 4.9, reviews: 218, badges: [""], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/7.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/7.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/10.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/9.jpeg?raw=true"], mercadopago: "https://mpago.li/2zMJM4h" },
+  { id: 3, nombre: "Cuadernillo para Trabajar la Dislexia", descripcion: "Material diseñado específicamente para niños con dislexia. Actividades progresivas que facilitan la lectura, mejoran la concentración y fortalecen la confianza.", materia: "Dislexia", grado: "3° grado", paginas: 26, precio: 2990, rating: 4.7, reviews: 89, badges: ["nuevo"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/13.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/12.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/15.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/14.jpeg?raw=true"], mercadopago: "https://mpago.li/2Q2aYt6" },
+  { id: 4, nombre: "IA para Docentes Tu Guía Definitiva", descripcion: "Domina la IA para ahorrar tiempo, personalizar el aprendizaje y transformar tus clases.", materia: "IA", grado: "Profesores", paginas: 7, precio: 0, rating: 4.6, reviews: 0, badges: ["gratis"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/18.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/18.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/16.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/17.jpeg?raw=true"], pdf: "https://jgnurniu.github.io/EducaKids/ia.html", mercadopago: "" },
+  { id: 5, nombre: "Cuadernillo de Actividades Preescolar", descripcion: "Material de trabajo Grafomotricidad, con ejercicios de coordinación fina, para que la mano se suelte.", materia: "Grafomotricidad", grado: "Padres", paginas: 108, precio: 2990, rating: 4.2, reviews: 140, badges: ["nuevo"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/WhatsApp%20Image%202026-03-27%20at%2016.04.02.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo2.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo3.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo6.jpeg?raw=true"], mercadopago: "https://mpago.li/17C4ZKZ" },
+  { id: 6, nombre: "Cuadernillo de Grafomotricidad", descripcion: "Material de trabajo Grafomotricidad con +18 Actividades para niños de 3 años para adelante.", materia: "Grafomotricidad", grado: "Padres", paginas: 21, precio: 2990, rating: 4.9, reviews: 95, badges: ["hot"], imagen: "https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo5.jpeg?raw=true", preview: ["https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo8.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo10.jpeg?raw=true", "https://github.com/jgnurniu/EducaKids-Shop/blob/main/grafo9.jpeg?raw=true"], mercadopago: "https://mpago.li/1YZXc44" }
+];
 
-  function stars(r) { return '★'.repeat(Math.floor(r)) + (r%1>=.5?'½':'') + '☆'.repeat(5-Math.floor(r)-(r%1>=.5?1:0)); }
+/* ---- LÓGICA ---- */
+let currentProd = null;
 
-  let currentProd = null;
+function stars(r) { 
+  return '★'.repeat(Math.floor(r)) + (r % 1 >= .5 ? '½' : '') + '☆'.repeat(5 - Math.floor(r) - (r % 1 >= .5 ? 1 : 0)); 
+}
 
-  function switchThumb(idx) {
-    document.getElementById('mainImg').src = currentProd.preview[idx];
-    document.querySelectorAll('.thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
+function switchThumb(idx) {
+  if (!currentProd) return;
+  document.getElementById('mainImg').src = currentProd.preview[idx];
+  document.querySelectorAll('.thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+}
+
+function buyNow(id) {
+  const p = productos.find(x => x.id === id);
+  if (!p) return;
+  if (p.precio === 0) { 
+    window.open(p.pdf, '_blank'); 
+    return; 
   }
+  sessionStorage.setItem('educakids_paid', JSON.stringify([id]));
+  window.location.href = p.mercadopago || '#';
+}
 
-  function buyNow(id) {
-    const p = productos.find(x=>x.id===id);
-    if (!p) return;
-    if (p.precio===0) { window.location.href = p.pdf; return; }
-    sessionStorage.setItem('educakids_paid', JSON.stringify([id]));
-    window.location.href = p.mercadopago || '#';
-  }
-
-  function renderProduct(p) {
-    currentProd = p;
-    document.title = p.nombre + ' — EducaKids Shop';
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.content = p.descripcion;
-    document.getElementById('breadMateria').textContent = p.materia;
-    document.getElementById('breadTitle').textContent = p.nombre;
-
-    const isFree = p.precio === 0;
-    const priceHtml = isFree
-      ? `<div class="price-free">Gratis</div>`
-      : `<div class="price-main">
-           <span class="price-currency">$</span>
-           <span class="price-integer">${Math.floor(p.precio).toLocaleString('es-AR')}</span>
-           <span class="price-decimal">00</span>
-         </div>
-         <div class="price-installment">en 3 cuotas sin interés de $${(p.precio/3).toLocaleString('es-AR',{maximumFractionDigits:0})}</div>`;
-
-    const buyPriceHtml = isFree
-      ? `<div class="buy-price-free">Gratis</div>`
-      : `<div class="buy-price-main">
-           <span class="buy-price-currency">$</span>
-           <span class="buy-price-integer">${Math.floor(p.precio).toLocaleString('es-AR')}</span>
-           <span class="buy-price-decimal">00</span>
-         </div>
-         <div class="buy-installment">en 3 cuotas sin interés de $${(p.precio/3).toLocaleString('es-AR',{maximumFractionDigits:0})}</div>`;
-
-    const badgeMap = { nuevo: '<span style="background:#3483FA;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Nuevo</span>', gratis: '<span style="background:#00A650;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Gratis</span>', hot: '<span style="background:#F04E23;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Más vendido</span>' };
-    const badgesHtml = (p.badges||[]).map(b=>badgeMap[b]||'').join(' ');
-
-    const thumbsHtml = p.preview.map((src,i) => `
-      <div class="thumb ${i===0?'active':''}" onclick="switchThumb(${i})">
-        <img src="${src}" alt="Vista ${i+1}" loading="lazy">
-      </div>`).join('');
-
-    const buyBtnHtml = isFree
-      ? `<a href="${p.pdf}" download class="btn-buy-mp free">📥 Descargar PDF gratis</a>`
-      : `<button class="btn-buy-mp primary" onclick="buyNow(${p.id})">
-           <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
-           Comprar con Mercado Pago
-         </button>`;
-        
-
-    document.getElementById('productPage').innerHTML = `
-      <!-- GALLERY -->
-      <div class="gallery-col">
-        <div class="gallery-main">
-          <img id="mainImg" src="${p.preview[0]}" alt="${p.nombre}">
-        </div>
-        <div class="gallery-thumbs">${thumbsHtml}</div>
-        <p class="gallery-note">📄 Vista previa de 3 páginas del material</p>
-      </div>
-
-      <!-- INFO COLUMN -->
-      <div class="info-col">
-        <!-- MAIN INFO CARD -->
-        <div class="info-card">
-          <div class="product-condition">Material educativo nuevo ${badgesHtml ? '· '+badgesHtml : ''}</div>
-          <h1 class="product-title">${p.nombre}</h1>
-          <div class="product-rating-row">
-            <span class="stars">${stars(p.rating)}</span>
-            <span class="rating-num">${p.rating}</span>
-            <span class="rating-count">(${p.reviews} calificaciones)</span>
-          </div>
-          <div class="price-block">
-            ${priceHtml}
-            <div class="price-shipping">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              Descarga inmediata tras el pago
-            </div>
-          </div>
-          <h2 style="font-size:.88rem;font-weight:700;color:#333;margin-bottom:10px">Descripción</h2>
-          <p class="desc-text">${p.descripcion}</p>
-        </div>
-
-        <!-- SPECS CARD -->
-        <div class="info-card">
-          <h2 style="font-size:.88rem;font-weight:700;color:#333;margin-bottom:10px">Características del material</h2>
-          <div class="specs-list">
-            <div class="spec-row"><span class="spec-label">Materia</span><span class="spec-val">${p.materia}</span></div>
-            <div class="spec-row"><span class="spec-label">Nivel / Grado</span><span class="spec-val">${p.grado}</span></div>
-            <div class="spec-row"><span class="spec-label">Páginas</span><span class="spec-val">${p.paginas} páginas</span></div>
-            <div class="spec-row"><span class="spec-label">Formato</span><span class="spec-val">PDF digital (A4)</span></div>
-            <div class="spec-row"><span class="spec-label">Uso</span><span class="spec-val">Imprimible · Uso personal / aula</span></div>
-            <div class="spec-row"><span class="spec-label">Idioma</span><span class="spec-val">Español (Argentina)</span></div>
-          </div>
-        </div>
-      </div>
-
+function renderProduct(p) {
+  currentProd = p;
+  document.title = p.nombre + ' — EducaKids Shop';
   
-  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = p.descripcion;
+  
+  document.getElementById('breadMateria').textContent = p.materia;
+  document.getElementById('breadTitle').textContent = p.nombre;
 
-  function renderRelated(p) {
-    const related = productos.filter(x => x.id !== p.id && (x.materia === p.materia || x.grado === p.grado)).slice(0, 4);
-    if (!related.length) return;
-    document.getElementById('relatedSection').style.display = 'block';
-    document.getElementById('relatedGrid').innerHTML = related.map(r => {
-      const isFree = r.precio === 0;
-      return `<a href="producto.html?id=${r.id}" class="mini-card">
-        <div class="mini-card-img"><img src="${r.imagen}" alt="${r.nombre}" loading="lazy"></div>
-        <div class="mini-card-body">
-          <div class="mini-card-title">${r.nombre}</div>
-          <div class="mini-card-price ${isFree?'free':''}">${isFree?'Gratis':'$'+r.precio.toLocaleString('es-AR')}</div>
+  const isFree = p.precio === 0;
+  
+  // HTML de precios
+  const priceHtml = isFree
+    ? `<div class="price-free" style="color:#00A650; font-size: 2rem; font-weight: bold;">Gratis</div>`
+    : `<div class="price-main">
+          <span class="price-currency">$</span>
+          <span class="price-integer">${Math.floor(p.precio).toLocaleString('es-AR')}</span>
+          <span class="price-decimal">00</span>
+       </div>
+       <div class="price-installment">en 3 cuotas sin interés de $${(p.precio / 3).toLocaleString('es-AR', { maximumFractionDigits: 0 })}</div>`;
+
+  // HTML de Botón
+  const buyBtnHtml = isFree
+    ? `<button class="btn-buy-mp free" onclick="buyNow(${p.id})" style="background:#00A650; color:white; border:none; padding:15px 30px; border-radius:6px; cursor:pointer; font-weight:bold; width:100%; font-size:1.1rem;">
+         📥 Descargar material gratis
+       </button>`
+    : `<button class="btn-buy-mp primary" onclick="buyNow(${p.id})" style="background:#3483FA; color:white; border:none; padding:15px 30px; border-radius:6px; cursor:pointer; font-weight:bold; width:100%; font-size:1.1rem; display:flex; align-items:center; justify-content:center; gap:10px;">
+         <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-8 2a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg>
+         Comprar ahora
+       </button>`;
+
+  const badgeMap = { 
+    nuevo: '<span style="background:#3483FA;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Nuevo</span>', 
+    gratis: '<span style="background:#00A650;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Gratis</span>', 
+    hot: '<span style="background:#F04E23;color:white;padding:2px 8px;border-radius:3px;font-size:.72rem;font-weight:700;text-transform:uppercase;">Más vendido</span>' 
+  };
+  
+  const badgesHtml = (p.badges || []).map(b => badgeMap[b] || '').join(' ');
+
+  const thumbsHtml = p.preview.map((src, i) => `
+    <div class="thumb ${i === 0 ? 'active' : ''}" onclick="switchThumb(${i})">
+      <img src="${src}" alt="Vista ${i + 1}" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
+    </div>`).join('');
+
+  // Inyección de contenido al contenedor principal
+  document.getElementById('productPage').innerHTML = `
+    <div class="gallery-col">
+      <div class="gallery-main" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; margin-bottom: 10px;">
+        <img id="mainImg" src="${p.preview[0]}" alt="${p.nombre}" style="width:100%; display:block;">
+      </div>
+      <div class="gallery-thumbs" style="display:flex; gap:10px;">${thumbsHtml}</div>
+      <p class="gallery-note" style="font-size:0.8rem; color:#666; margin-top:15px; text-align:center;">📄 Vista previa del material digital</p>
+    </div>
+
+    <div class="info-col">
+      <div class="info-card" style="padding:20px; border:1px solid #eee; border-radius:8px; margin-bottom:20px;">
+        <div class="product-condition" style="font-size:0.8rem; color:#666; margin-bottom:5px;">Digital · ${badgesHtml}</div>
+        <h1 class="product-title" style="font-size:1.5rem; margin-bottom:10px;">${p.nombre}</h1>
+        <div class="product-rating-row" style="margin-bottom:15px;">
+          <span class="stars" style="color:#F2B01E;">${stars(p.rating)}</span>
+          <span class="rating-num" style="font-weight:bold; margin-left:5px;">${p.rating}</span>
+          <span class="rating-count" style="color:#666; font-size:0.9rem;">(${p.reviews} reviews)</span>
         </div>
-      </a>`;
-    }).join('');
+        
+        <div class="price-block" style="margin-bottom:20px;">
+          ${priceHtml}
+        </div>
+
+        <div class="buy-container" style="margin-bottom:25px;">
+          ${buyBtnHtml}
+          <p style="font-size:0.75rem; color:#00A650; margin-top:8px; display:flex; align-items:center; gap:5px;">
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Envío gratis por E-mail en el acto
+          </p>
+        </div>
+
+        <h2 style="font-size:.9rem; font-weight:700; color:#333; margin-bottom:10px">Descripción</h2>
+        <p class="desc-text" style="line-height:1.5; color:#444;">${p.descripcion}</p>
+      </div>
+
+      <div class="info-card" style="padding:20px; border:1px solid #eee; border-radius:8px;">
+        <h2 style="font-size:.9rem; font-weight:700; color:#333; margin-bottom:15px">Especificaciones</h2>
+        <div class="specs-list" style="display:flex; flex-direction:column; gap:8px;">
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f5f5f5; padding-bottom:5px;">
+            <span style="color:#666;">Materia</span><span style="font-weight:500;">${p.materia}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f5f5f5; padding-bottom:5px;">
+            <span style="color:#666;">Grado</span><span style="font-weight:500;">${p.grado}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #f5f5f5; padding-bottom:5px;">
+            <span style="color:#666;">Páginas</span><span style="font-weight:500;">${p.paginas}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderRelated(p) {
+  const related = productos.filter(x => x.id !== p.id && x.nombre !== "" && (x.materia === p.materia || x.grado === p.grado)).slice(0, 4);
+  if (!related.length) return;
+  
+  const section = document.getElementById('relatedSection');
+  if (section) section.style.display = 'block';
+  
+  const grid = document.getElementById('relatedGrid');
+  if (grid) {
+    grid.innerHTML = related.map(r => `
+      <a href="producto.html?id=${r.id}" class="mini-card" style="text-decoration:none; color:inherit; border:1px solid #eee; border-radius:8px; overflow:hidden; display:block;">
+        <div class="mini-card-img" style="height:150px; overflow:hidden;">
+          <img src="${r.imagen || r.preview[0]}" alt="${r.nombre}" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="mini-card-body" style="padding:10px;">
+          <div class="mini-card-title" style="font-size:0.85rem; font-weight:600; height:34px; overflow:hidden; margin-bottom:5px;">${r.nombre}</div>
+          <div class="mini-card-price" style="font-weight:700; color:#333;">${r.precio === 0 ? 'Gratis' : '$' + r.precio.toLocaleString('es-AR')}</div>
+        </div>
+      </a>`).join('');
   }
+}
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const id = parseInt(new URLSearchParams(window.location.search).get('id'), 10);
-    const p = productos.find(x => x.id === id);
-    if (p) {
-      renderProduct(p);
-      renderRelated(p);
-    } else {
-      document.getElementById('productPage').innerHTML = `
-        <div style="padding:80px;text-align:center;width:100%">
-          <p style="font-size:2.5rem;margin-bottom:16px">😕</p>
-          <h2 style="margin-bottom:8px">Producto no encontrado</h2>
-          <a href="index.html" style="color:#3483FA;font-weight:600">← Volver al catálogo</a>
-        </div>`;
-    }
-  });
+/* ---- INICIO ---- */
+document.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'), 10);
+  const p = productos.find(x => x.id === id);
+
+  if (p) {
+    renderProduct(p);
+    renderRelated(p);
+  } else {
+    document.getElementById('productPage').innerHTML = `
+      <div style="padding:80px; text-align:center; width:100%">
+        <p style="font-size:2.5rem; margin-bottom:16px">😕</p>
+        <h2 style="margin-bottom:8px">Producto no encontrado</h2>
+        <a href="index.html" style="color:#3483FA; font-weight:600">← Volver al catálogo</a>
+      </div>`;
+  }
+});
 </script>
-
 
 
 
